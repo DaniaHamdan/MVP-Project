@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongojs=require('mongojs') //this is an liprary from mongodb
-var db=mongojs('contactlist',['contactlist'])
+var db=mongojs('mongodb://dania:dandonzh82**@ds157247.mlab.com:57247/contactlist',['contactlist'])
 var bodyParser=require("body-parser")
 
 app.use(express.static(__dirname+"/client"))

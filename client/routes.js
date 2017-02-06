@@ -1,6 +1,6 @@
 
 var mongojs=require('mongojs')
-var db=mongojs('contactlist',['contactlist'])//
+var db=mongojs('mongodb://dania:dandonzh82**@ds157247.mlab.com:57247/contactlist',['contactlist'])//
 //var bodyParser=require("body-parser")
 
 module.exports = function (app, express) {
