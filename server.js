@@ -9,8 +9,5 @@ app.use(express.static(__dirname+"/client"))
 app.use(bodyParser.json()) //this for take the body content
 require('./client/routes.js')(app, express);
 
-var port = 8000;
-app.listen(process.env.PORT || port,function(){
-	console.log("server running on port  "+port)
-});
+app.listen(process.env.PORT ||8000 );
 module.exports = app;
