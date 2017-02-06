@@ -1,21 +1,42 @@
-function AppCtlr ($scope,$http){
+var app = angular.module('myapp', [])
+app.controller("AppCtlr" ,function ($scope,$http){
 	console.log("hello world from ");
-	$http.get('/contactlist')
-	person1={
-		name:"jon",
-		email:"hello.com",
-		number:"12345"
+	var add=function(){
+		$http.get("/contactlist").success(function(data){
+			console.log("i got the data")
+			$scope.contactlist=data;
+			$scope.contact="";
+		});
 	};
-	person2={
-		name:"jonyy",
-		email:"hellklko.com",
-		number:"1239845"
+
+	add()
+
+	$scope.addContact=function(){
+		console.log($scope.contact)
+		$http.post("/contactlist",$scope.contact).success(function(res){
+			console.log(res)
+			add()
+		});
 	};
-	person3={
-		name:"kan",
-		email:"hello123.com",
-		number:"768897"
+
+	$scope.remove=function(id){
+		console.log(id)
+		$http.delete("/contactlist/"+id).success(function(res){
+			add()
+		});
 	};
-	var contactlist=[person1,person2,person3]
-	$scope.contactlist=contactlist;
-}
+
+	$scope.edit=function(id){
+		console.log(id)
+		$http.get("/contactlist/"+id).success(function(res){
+			$scope.contact=res;
+		})
+	};
+
+	$scope.update=function(){
+		console.log($scope.contact._id)
+		$http.put('/contactlist/'+$scope.contact._id,$scope.contact).success(function(res){
+			add();
+		});
+	};
+})
